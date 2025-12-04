@@ -2,55 +2,36 @@ package com.zacurrya.httpserver;
 
 import com.zacurrya.httpserver.config.Configuration;
 import com.zacurrya.httpserver.config.ConfigurationManager;
+import com.zacurrya.httpserver.core.ServerListenerThread;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.IOException;
 
 /**
  * Driver Class for the HTTP Server
  */
 public class HttpServer {
 
-    public static void main(String[] args) {
+    private final static Logger LOGGER = LoggerFactory.getLogger(HttpServer.class);
 
-        System.out.println("Starting HTTP Server...");
+    public static void main(String[] args) throws IOException {
+
+        LOGGER.info("Starting HTTP Server...");
 
         ConfigurationManager.getInstance().loadConfigurationFile("src/main/resources/http.json");
         Configuration config = ConfigurationManager.getInstance().getCurrentConfiguration();
 
-        System.out.println("Using Port: " + config.getPort());
-        System.out.println("Using Web Root: " + config.getWebRoot());
+        LOGGER.info("Using Port: " + config.getPort());
+        LOGGER.info("Using Web Root: " + config.getWebRoot());
 
+        // Starts a server listener thread
         try {
-            ServerSocket serverSocket = new ServerSocket(config.getPort());
-            Socket socket = serverSocket.accept();
-
-            InputStream inputStream = socket.getInputStream();
-            OutputStream outputStream = socket.getOutputStream();
-
-            String html = "<html><head><title>Java HTTP Server</title></head><body><h1>Built with Maven, Java & Jackson (Json conversion)</h1></body></html>";
-
-            final String CRLF = "\n\r"; // 13, 10
-
-
-            String response =
-                    "HTTP/1.1 200 OK" + CRLF +  // Status Line;   :   HTTP VERSION RESPONSE_CODE RESPONSE_MESSAGE
-                    "Content-Length: " + html.getBytes().length + CRLF +  // HEADER
-                            CRLF +
-                            html +
-                            CRLF + CRLF ;
-
-            outputStream.write(response.getBytes());
-
-            inputStream.close();
-            outputStream.close();
-            socket.close();
-            serverSocket.close();
-
-        } catch (Exception e) {
+            ServerListenerThread serverListenerThread = new ServerListenerThread(config.getPort(), config.getWebroot());
+            serverListenerThread.start();
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 }
