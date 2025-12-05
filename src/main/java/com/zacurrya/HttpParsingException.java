@@ -1,4 +1,4 @@
-package com.zacurrya.http;
+package com.zacurrya;
 
 public class HttpParsingException extends Exception {
 

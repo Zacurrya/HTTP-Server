@@ -1,5 +1,7 @@
 package com.zacurrya.httpserver.core;
 
+import com.zacurrya.httpserver.core.io.WebRootNotFoundException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -15,6 +17,7 @@ public class ServerListenerThread extends Thread {
 
     private int port;
     private String webroot;
+    private WebRootHandler webRootHandler;
     ServerSocket serverSocket;
 
     public ServerListenerThread(int port, String webroot) throws IOException {
@@ -22,6 +25,11 @@ public class ServerListenerThread extends Thread {
         this.webroot = webroot;
         this.serverSocket = new ServerSocket(this.port);
 
+        try {
+            this.webRootHandler = new WebRootHandler(webroot);
+        } catch (WebRootNotFoundException e) {
+            throw new IOException("Failed to initialize WebRootHandler", e);
+        }
     }
     @Override
     public void run() {
@@ -32,7 +40,7 @@ public class ServerListenerThread extends Thread {
 
                 LOGGER.info(" * Connection accepted: " + socket.getInetAddress());
 
-                HttpConnectionWorkerThread workerThread = new HttpConnectionWorkerThread(socket);
+                HttpConnectionWorkerThread workerThread = new HttpConnectionWorkerThread(socket, webRootHandler);
                 workerThread.start();
             }
             // serverSocket.close(); // TODO Handle close.

@@ -2,8 +2,7 @@ package com.zacurrya.httpserver.config;
 
 public class HttpConfigurationException extends RuntimeException {
 
-    public HttpConfigurationException() {
-    }
+    public HttpConfigurationException() {}
 
     public HttpConfigurationException(String message) {
         super(message);

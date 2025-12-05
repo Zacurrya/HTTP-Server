@@ -1,4 +1,4 @@
-package com.zacurrya.http;
+package com.zacurrya;
 
 public abstract class HttpMessage {
 

@@ -1,5 +1,10 @@
 package com.zacurrya.http;
 
+import com.zacurrya.HttpParser;
+import com.zacurrya.HttpParsingException;
+import com.zacurrya.HttpRequest;
+import com.zacurrya.HttpStatusCode;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -60,7 +65,7 @@ public class HttpHeadersParserTest {
                     request);
         } catch (InvocationTargetException e) {
             if (e.getCause() instanceof HttpParsingException) {
-                assertEquals(HttpStatusCode.CLIENT_ERROR_400_BAD_REQUEST, ((HttpParsingException)e.getCause()).getErrorCode());
+                Assertions.assertEquals(HttpStatusCode.CLIENT_ERROR_400_BAD_REQUEST, ((HttpParsingException)e.getCause()).getErrorCode());
             }
         }
 

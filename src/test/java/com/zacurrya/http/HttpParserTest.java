@@ -1,11 +1,17 @@
 package com.zacurrya.http;
 
+import com.zacurrya.HttpMethod;
+import com.zacurrya.HttpParser;
+import com.zacurrya.HttpParsingException;
+import com.zacurrya.HttpRequest;
+import com.zacurrya.HttpStatusCode;
+import com.zacurrya.HttpVersion;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
@@ -34,10 +40,10 @@ class HttpParserTest {
             fail();
         }
         assertNotNull(request);
-        assertEquals(request.getMethod(), HttpMethod.GET);
+        Assert.assertEquals(request.getMethod(), HttpMethod.GET);
         assertEquals(request.getRequestTarget(), "/");
         assertEquals(request.getOriginalHttpVersion(), "HTTP/1.1");
-        assertEquals(request.getBestCompatibleHttpVersion(), HttpVersion.HTTP_1_1);
+        Assert.assertEquals(request.getBestCompatibleHttpVersion(), HttpVersion.HTTP_1_1);
     }
 
     @Test

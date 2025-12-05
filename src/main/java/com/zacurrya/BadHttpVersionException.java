@@ -1,4 +1,4 @@
-package com.zacurrya.http;
+package com.zacurrya;
 
 public class BadHttpVersionException extends Exception {
 

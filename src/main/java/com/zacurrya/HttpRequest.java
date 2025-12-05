@@ -1,9 +1,7 @@
-package com.zacurrya.http;
+package com.zacurrya;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 public class HttpRequest extends HttpMessage {
 

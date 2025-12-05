@@ -1,4 +1,4 @@
-package com.zacurrya.httpserver.core.io;
+package com.zacurrya.httpserver.core;
 
 public class WebRootNotFoundException extends Exception{
 

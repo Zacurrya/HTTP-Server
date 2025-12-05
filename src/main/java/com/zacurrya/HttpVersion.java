@@ -1,4 +1,4 @@
-package com.zacurrya.http;
+package com.zacurrya;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

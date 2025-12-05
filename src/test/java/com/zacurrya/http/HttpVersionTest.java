@@ -1,5 +1,7 @@
 package com.zacurrya.http;
 
+import com.zacurrya.BadHttpVersionException;
+import com.zacurrya.HttpVersion;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -8,6 +8,13 @@
   <name>Archetype - HTTP_Server</name>
   <url>http://maven.apache.org</url>
 
+    <!-- Java Version Properties -->
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <!-- Dependencies -->
     <dependencies>
         <dependency>
@@ -45,4 +52,18 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <!-- Build Configuration -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>com.zacurrya.httpserver.HttpServer</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
