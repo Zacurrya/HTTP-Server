@@ -15,7 +15,7 @@ public class HttpServer {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(HttpServer.class);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         LOGGER.info("Starting HTTP Server...");
 

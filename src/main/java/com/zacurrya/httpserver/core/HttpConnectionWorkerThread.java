@@ -30,7 +30,7 @@ public class HttpConnectionWorkerThread extends Thread {
             final String CRLF = "\n\r"; // 13, 10
 
             String response =
-                    "HTTP/1.1 200 OK" + CRLF +  // Status Line;   :   HTTP VERSION RESPONSE_CODE RESPONSE_MESSAGE
+                    "HTTP/1.1 200 OK" + CRLF +  // Status Line;   :   HTTP/VERSION RESPONSE_CODE RESPONSE_MESSAGE
                             "Content-Length: " + html.getBytes().length + CRLF +  // HEADER
                             CRLF +
                             html +
